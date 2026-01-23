@@ -1,26 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
-package javafxapplication1;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+package Login;
 
-/**
- * FXML Controller class
- *
- * @author Wellcome
- */
-public class RoleSelectionController implements Initializable {
+import java.io.IOException;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+
+
+ 
+public class RoleSelectionController  {
+
+    @FXML
+    private Button User_rolebtn;
+    
+    @FXML
+    private Button Authority_rolebtn;
+    
+    private Stage stage;
+    
+    public void UserPage(ActionEvent event) throws IOException
+    {
+         Parent root= FXMLLoader.load(getClass().getResource("/Login/UserSignUp.fxml"));
+         Scene scene= new Scene(root);
+         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+         stage.setScene(scene);
+         stage.show();
+         
+         
+    }
+    
     
 }
