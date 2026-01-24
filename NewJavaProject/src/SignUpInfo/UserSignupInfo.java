@@ -1,0 +1,56 @@
+
+package SignUpInfo;
+
+/**
+ *
+ * @author Lenovo
+ */
+public class UserSignupInfo {
+    
+    private String user_name;
+    private String name;
+    private String gender;
+    private String age;
+    private String phone_number;
+    private String NID;
+    private String email_id;
+    private String emergency_contact;
+    private String area;
+    private String blood_group;
+    public String Allergies;
+    public UserSignupInfo(){
+        
+    }
+    public UserSignupInfo(String user_name, String name, String gender, String age, String phone_number, String nid, String email_id, String emergency_contact, String area, String blood_group,String allergies)
+    {
+        this.user_name = user_name;
+        this.name = name;
+        this.gender = gender;
+        this.age = age;
+        this.phone_number = phone_number;
+        this.NID = nid;
+        this.email_id = email_id;
+        this.emergency_contact = emergency_contact;
+        this.area = area;
+        this.blood_group = blood_group;
+        this.Allergies = allergies;
+    }
+    
+    public void showInfo()
+    {
+        System.out.println("user details:");
+        System.out.println("User_name: "+user_name);
+        System.out.println("Name: "+name);
+        System.out.println("Gender :"+gender);
+        System.out.println("Age :"+age);
+        System.out.println("Phone number: "+phone_number);
+        System.out.println("NID: "+NID);
+        System.out.println("Email ID :"+email_id);
+        System.out.println("Emergengy contact: "+emergency_contact);
+        System.out.println("City/Area: "+area);
+        System.out.println("Blood group: "+blood_group);
+        System.out.println("Allergies: "+Allergies);
+    }
+    
+    
+}
