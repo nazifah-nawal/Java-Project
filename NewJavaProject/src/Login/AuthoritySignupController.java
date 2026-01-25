@@ -11,6 +11,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import SignUpInfo.AuthoritySignupInfo;
+import java.io.IOException;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 public class AuthoritySignupController implements Initializable {
     
@@ -32,6 +38,8 @@ public class AuthoritySignupController implements Initializable {
     private String InstitutionType;
     private String Area;
     
+    private Stage stage;
+    
             
     
     ObservableList<String> list_inst= FXCollections.observableArrayList("Hospital","Police Station","Fire Service");
@@ -50,6 +58,17 @@ public class AuthoritySignupController implements Initializable {
         InstitutionType=InstitutionBox.getValue();
         
         Area=AddressBox.getValue();
+        
+        
+    }
+    
+    public void LoginPageLink(ActionEvent event)throws IOException
+    {
+        Parent root=FXMLLoader.load(getClass().getResource("AuthorityLogin.fxml"));
+         Scene scene=new Scene(root);
+         stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+         stage.setScene(scene);
+         stage.show();
     }
     
     public void CollectInfo()

@@ -90,7 +90,7 @@
             <TextField fx:id="PhoneNum" layoutX="129.0" layoutY="140.0" prefHeight="27.0" prefWidth="205.0" promptText="ex.017xxxxxxxx" style="-fx-background-color: transparent; -fx-border-color: F6F3C2; -fx-border-width: 0px 0px 2px 0px;" />
             <TextField fx:id="Nid" layoutX="129.0" layoutY="170.0" prefHeight="27.0" prefWidth="205.0" promptText="NId no." style="-fx-background-color: transparent; -fx-border-color: F6F3C2; -fx-border-width: 0px 0px 2px 0px;" />
             <Label layoutX="12.0" layoutY="33.0" text="User Name :" textFill="#f6f3c2" />
-            <TextField fx:id="UserName" layoutX="129.0" layoutY="20.0" prefHeight="27.0" prefWidth="205.0" promptText="UserName" style="-fx-background-color: transparent; -fx-border-color: F6F3C2; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField fx:id="UserName" layoutX="129.0" layoutY="20.0" prefHeight="27.0" prefWidth="205.0" promptText="Set UserName" style="-fx-background-color: transparent; -fx-border-color: F6F3C2; -fx-border-width: 0px 0px 2px 0px;" />
             <Button fx:id="User_signupbtn" layoutX="117.0" layoutY="447.0" mnemonicParsing="false" onAction="#CollectInfo" prefHeight="25.0" prefWidth="133.0" style="-fx-background-color: F6F3C2; -fx-border-radius: 20;" text="Sign Up" textFill="#a64d1d">
                <font>
                   <Font name="System Bold" size="12.0" />
