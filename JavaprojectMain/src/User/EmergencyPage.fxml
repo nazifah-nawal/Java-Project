@@ -136,7 +136,7 @@
                   </Label>
                   <HBox layoutX="-4.0" layoutY="59.0" prefHeight="106.0" prefWidth="525.0" spacing="10.0">
                      <children>
-                        <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="103.0" prefWidth="119.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #e25a25; -fx-border-color: black; -fx-border-width: 2;">
+                        <Button fx:id="FireButton" contentDisplay="TOP" mnemonicParsing="false" onAction="#FireButtonClicked" prefHeight="103.0" prefWidth="119.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #e25a25; -fx-border-color: black; -fx-border-width: 2;">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
@@ -169,7 +169,7 @@
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="119.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #80060f; -fx-border-color: black; -fx-border-width: 2;" text="Button">
+                        <Button fx:id="AccidentButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#AccidentButtonClicked" prefHeight="103.0" prefWidth="119.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #80060f; -fx-border-color: black; -fx-border-width: 2;" text="Button">
                            <graphic>
                               <VBox prefHeight="104.0" prefWidth="100.0">
                                  <children>
@@ -199,7 +199,7 @@
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button layoutX="147.0" layoutY="10.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="119.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 2; -fx-background-color: #005b96;" text="Button">
+                        <Button fx:id="EarthquakeButton" layoutX="147.0" layoutY="10.0" mnemonicParsing="false" onAction="#EarthquakeButtonClicked" prefHeight="103.0" prefWidth="119.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 2; -fx-background-color: #005b96;" text="Button">
                            <graphic>
                               <VBox prefHeight="100.0" prefWidth="100.0">
                                  <children>
@@ -229,7 +229,7 @@
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button layoutX="284.0" layoutY="10.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="119.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 2; -fx-background-color: C7DB9C;" text="Button">
+                        <Button fx:id="CrimeButton" layoutX="284.0" layoutY="10.0" mnemonicParsing="false" onAction="#CrimeButtonClicked" prefHeight="103.0" prefWidth="119.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 2; -fx-background-color: C7DB9C;" text="Button">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>

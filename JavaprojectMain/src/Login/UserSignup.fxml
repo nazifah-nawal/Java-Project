@@ -60,7 +60,7 @@
                </font></Label>
             <Label layoutX="12.0" layoutY="330.0" text="Medical Information" textFill="#fdfaf6" underline="true">
                <font>
-                  <Font name="Elephant Italic" size="15.0" />
+                  <Font name="Elephant" size="15.0" />
                </font>
                <effect>
                   <Glow />
@@ -109,7 +109,7 @@
                   <Font name="Elephant" size="13.0" />
                </font></Label>
             <TextField fx:id="UserName" layoutX="129.0" layoutY="20.0" prefHeight="27.0" prefWidth="205.0" promptText="Set UserName" style="-fx-background-color: transparent; -fx-border-color: #FDFAF6; -fx-border-width: 0px 0px 2px 0px;" />
-            <Button fx:id="User_signupbtn" layoutX="117.0" layoutY="447.0" mnemonicParsing="false" onAction="#CollectInfo" prefHeight="25.0" prefWidth="133.0" style="-fx-background-color: #FDFAF6; -fx-border-radius: 20;" text="Sign Up" textFill="#123458">
+            <Button fx:id="User_signupbtn" layoutX="117.0" layoutY="447.0" mnemonicParsing="false" onAction="#EmergencyPageLink" prefHeight="25.0" prefWidth="133.0" style="-fx-background-color: #FDFAF6; -fx-border-radius: 20;" text="Sign Up" textFill="#123458">
                <font>
                   <Font name="Elephant" size="13.0" />
                </font>

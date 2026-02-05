@@ -67,6 +67,14 @@ public class UserSignupController implements Initializable {
       
   }
   
+  public void EmergencyPageLink(ActionEvent event)throws IOException{
+      Parent root = FXMLLoader.load(getClass().getResource("/User/EmergencyPage.fxml"));
+      scene=new Scene(root);
+      stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+      stage.setScene(scene);
+      stage.show();
+  }
+  
   public void initialize(URL location, ResourceBundle resources)
   {
       Addressbox.setItems(list);

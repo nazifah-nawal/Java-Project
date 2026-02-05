@@ -4,23 +4,26 @@
  */
 package User;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
-/**
- * FXML Controller class
- *
- * @author Wellcome
- */
-public class TodoPageController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+public class TodoPageController  {
+
+      @FXML
+      private Label TodoLabel;
+     @FXML
+      private Label NottodoLabel;
+      
+      
+      public void setTextT(String text)
+      {
+          TodoLabel.setText(text);
+      }
+      
+      public void setTextN(String text)
+      {
+          NottodoLabel.setText(text);
+      }
     
 }
