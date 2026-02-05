@@ -95,7 +95,7 @@ public class UserSignupController implements Initializable {
       UserSignupInfo usi= new UserSignupInfo(userName,name,gender,age,phnNum,nid,email,emgContact,Address,blood,allergy);
       
       
-      //usi.showInfo();
+      usi.showInfo();
       
       
      

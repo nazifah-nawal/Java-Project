@@ -64,7 +64,7 @@ public class AuthoritySignupController implements Initializable {
     
     public void LoginPageLink(ActionEvent event)throws IOException
     {
-        Parent root=FXMLLoader.load(getClass().getResource("AuthorityLogin.fxml"));
+         Parent root=FXMLLoader.load(getClass().getResource("AuthorityLogin.fxml"));
          Scene scene=new Scene(root);
          stage=(Stage)((Node)event.getSource()).getScene().getWindow();
          stage.setScene(scene);

@@ -23,6 +23,7 @@ public class Main extends Application {
           Parent root= FXMLLoader.load(getClass().getResource("/Login/roleSelection.fxml"));
           Scene scene= new Scene(root);
           primaryStage.setScene(scene);
+         // primaryStage.setMaximized(true);
           primaryStage.setTitle("SOSync");
           
          Image icon = new Image(getClass().getResourceAsStream("/Login/images/Untitled-1.png"));

@@ -29,7 +29,9 @@ public class RoleSelectionController  {
          Parent root= FXMLLoader.load(getClass().getResource("/Login/UserSignUp.fxml"));
          Scene scene= new Scene(root);
          stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+         
          stage.setScene(scene);
+         //stage.setMaximized(true);
          stage.show();
          
          
