@@ -22,7 +22,7 @@
          <children>
             <Label layoutX="170.0" layoutY="121.0" text="User Name :" textFill="#123458">
                <font>
-                  <Font name="Elephant Italic" size="14.0" />
+                  <Font name="Elephant" size="14.0" />
                </font>
             </Label>
             <TextField layoutX="276.0" layoutY="116.0" prefHeight="27.0" prefWidth="277.0" promptText="Enter your username" style="-fx-background-color: transparent; -fx-border-color: #123458; -fx-border-width: 0px 0px 2px 0px;" />
