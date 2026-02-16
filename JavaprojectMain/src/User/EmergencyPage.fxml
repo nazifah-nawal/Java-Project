@@ -264,7 +264,7 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Button layoutX="207.0" layoutY="207.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="107.0" style="-fx-background-radius: 70; -fx-border-color: black; -fx-border-radius: 70; -fx-border-width: 2; -fx-background-color: #b30000;" text="EMERGENCY" textFill="WHITE">
+                  <Button fx:id="EmergencyButton" layoutX="207.0" layoutY="207.0" mnemonicParsing="false" onAction="#EmergencyButtonClicked" prefHeight="112.0" prefWidth="107.0" style="-fx-background-radius: 70; -fx-border-color: black; -fx-border-radius: 70; -fx-border-width: 2; -fx-background-color: #b30000;" text="EMERGENCY" textFill="WHITE">
                      <font>
                         <Font name="Elephant" size="11.0" />
                      </font>
@@ -272,6 +272,12 @@
                         <DropShadow />
                      </effect>
                   </Button>
+                  <Label fx:id="timerLabel" layoutX="245.0" layoutY="339.0">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="cancelButton" layoutX="450.0" layoutY="340.0" mnemonicParsing="false" onAction="#CancelEmergency" text="Cancel" visible="false" />
                </children>
             </AnchorPane>
          </center>
