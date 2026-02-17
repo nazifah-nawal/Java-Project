@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: FDFAF6;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login.AuthoritySignupController">
+   <left>
+      <AnchorPane prefHeight="200.0" prefWidth="353.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="102.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@images/Untitled-1.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="66.0" layoutY="63.0" text="Authority SignUp" textFill="#123458">
+               <font>
+                  <Font name="Elephant Italic" size="24.0" />
+               </font>
+            </Label>
+            <Label layoutX="62.0" layoutY="120.0" text="Enter the institute's information." textFill="#123458">
+               <font>
+                  <Font name="Elephant" size="14.0" />
+               </font>
+            </Label>
+            <Hyperlink fx:id="Login_linkAuthority" layoutX="90.0" layoutY="391.0" onAction="#LoginPageLink" text="Already have an account?" textFill="#123458" underline="true">
+               <font>
+                  <Font name="Elephant" size="13.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </AnchorPane>
+   </left>
+   <center>
+      <AnchorPane prefHeight="500.0" prefWidth="347.0" style="-fx-background-color: #123458;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="12.0" layoutY="116.0" text="Instition Name :" textFill="#eaefef">
+               <font>
+                  <Font name="Elephant" size="14.0" />
+               </font></Label>
+            <ComboBox fx:id="InstitutionBox" editable="true" layoutX="12.0" layoutY="54.0" onAction="#ComboBoxInfo" prefHeight="25.0" prefWidth="190.0" promptText="Institution Type" style="-fx-background-color: FDFAF6;" />
+            <ComboBox fx:id="AddressBox" editable="true" layoutX="12.0" layoutY="290.0" onAction="#ComboBoxInfo" prefHeight="25.0" prefWidth="205.0" promptText="City/Area" style="-fx-background-color: FDFAF6;" />
+            <Label layoutX="12.0" layoutY="158.0" text="Contact :" textFill="#fdfaf6">
+               <font>
+                  <Font name="Elephant" size="14.0" />
+               </font></Label>
+            <Label layoutX="12.0" layoutY="204.0" text="Email Id :" textFill="#fdfaf6">
+               <font>
+                  <Font name="Elephant" size="14.0" />
+               </font></Label>
+            <TextField layoutX="129.0" layoutY="103.0" prefHeight="27.0" prefWidth="205.0" promptText="Enter Name" style="-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField layoutX="129.0" layoutY="149.0" prefHeight="27.0" prefWidth="205.0" promptText="ex.017xxxxxxxx" style="-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px;" />
+            <TextField layoutX="129.0" layoutY="191.0" prefHeight="27.0" prefWidth="205.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px;" />
+            <Button fx:id="Authority_signup" layoutX="112.0" layoutY="340.0" mnemonicParsing="false" onAction="#CollectInfo" prefHeight="24.0" prefWidth="127.0" style="-fx-background-color: FDFAF6;" text="Sign Up" textFill="#123458">
+               <font>
+                  <Font name="Elephant" size="14.0" />
+               </font>
+            </Button>
+            <Label layoutX="12.0" layoutY="250.0" text="Address :" textFill="#fdfaf6">
+               <font>
+                  <Font name="Elephant" size="14.0" />
+               </font></Label>
+            <TextField layoutX="129.0" layoutY="236.0" prefHeight="27.0" prefWidth="205.0" promptText="Full Address" style="-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px;" />
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
