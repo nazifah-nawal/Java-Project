@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
@@ -134,21 +135,21 @@
                         <Font name="Elephant" size="18.0" />
                      </font>
                   </Label>
-                  <HBox layoutX="-4.0" layoutY="59.0" prefHeight="106.0" prefWidth="525.0" spacing="10.0">
+                  <HBox layoutX="-4.0" layoutY="59.0" maxWidth="1.7976931348623157E308" prefHeight="106.0" prefWidth="525.0" spacing="10.0" AnchorPane.bottomAnchor="228.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="59.0">
                      <children>
-                        <Button contentDisplay="TOP" mnemonicParsing="false" prefHeight="103.0" prefWidth="119.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #e25a25; -fx-border-color: black; -fx-border-width: 2;">
+                        <Button fx:id="FireButton" alignment="CENTER" contentDisplay="TOP" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#FireButtonClicked" prefHeight="109.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #e25a25; -fx-border-color: black; -fx-border-width: 2;" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets left="10.0" />
                            </HBox.margin>
                            <graphic>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
+                              <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
                                  <children>
-                                    <ImageView fitHeight="51.0" fitWidth="57.0" pickOnBounds="true" smooth="false">
+                                    <ImageView fitHeight="51.0" fitWidth="57.0" nodeOrientation="INHERIT" pickOnBounds="true" smooth="false">
                                        <image>
                                           <Image url="@../Login/images/fire.png" />
                                        </image>
                                        <VBox.margin>
-                                          <Insets left="22.0" top="5.0" />
+                                          <Insets left="22.0" right="10.0" top="5.0" />
                                        </VBox.margin>
                                     </ImageView>
                                     <Label alignment="CENTER" prefHeight="37.0" prefWidth="96.0" text="FIRE" textFill="WHITE">
@@ -169,16 +170,16 @@
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button layoutX="10.0" layoutY="10.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="119.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #80060f; -fx-border-color: black; -fx-border-width: 2;" text="Button">
+                        <Button fx:id="AccidentButton" alignment="CENTER" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#AccidentButtonClicked" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-background-color: #80060f; -fx-border-color: black; -fx-border-width: 2;" HBox.hgrow="ALWAYS">
                            <graphic>
-                              <VBox prefHeight="104.0" prefWidth="100.0">
+                              <VBox alignment="CENTER" prefHeight="104.0" prefWidth="100.0">
                                  <children>
                                     <ImageView fitHeight="64.0" fitWidth="63.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../Login/images/ambulance.png" />
                                        </image>
                                        <VBox.margin>
-                                          <Insets left="22.0" />
+                                          <Insets left="22.0" right="5.0" />
                                        </VBox.margin>
                                     </ImageView>
                                     <Label alignment="CENTER" prefHeight="40.0" prefWidth="100.0" text="ACCIDENT" textFill="WHITE">
@@ -199,16 +200,16 @@
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button layoutX="147.0" layoutY="10.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="119.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 2; -fx-background-color: #005b96;" text="Button">
+                        <Button fx:id="EarthquakeButton" alignment="CENTER" layoutX="147.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#EarthquakeButtonClicked" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 2; -fx-background-color: #005b96;" HBox.hgrow="ALWAYS">
                            <graphic>
-                              <VBox prefHeight="100.0" prefWidth="100.0">
+                              <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="100.0">
                                  <children>
                                     <ImageView fitHeight="53.0" fitWidth="53.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../Login/images/earthquake.png" />
                                        </image>
                                        <VBox.margin>
-                                          <Insets left="22.0" top="5.0" />
+                                          <Insets left="22.0" right="15.0" top="5.0" />
                                        </VBox.margin>
                                     </ImageView>
                                     <Label prefHeight="42.0" prefWidth="107.0" text="EARTHQUAKE" textFill="WHITE">
@@ -218,6 +219,9 @@
                                        <effect>
                                           <DropShadow />
                                        </effect>
+                                       <VBox.margin>
+                                          <Insets left="3.0" />
+                                       </VBox.margin>
                                     </Label>
                                  </children>
                                  <effect>
@@ -229,19 +233,19 @@
                               <DropShadow />
                            </effect>
                         </Button>
-                        <Button layoutX="284.0" layoutY="10.0" mnemonicParsing="false" prefHeight="103.0" prefWidth="119.0" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 2; -fx-background-color: C7DB9C;" text="Button">
+                        <Button fx:id="CrimeButton" alignment="CENTER" layoutX="284.0" layoutY="10.0" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#CrimeButtonClicked" style="-fx-background-radius: 20; -fx-border-radius: 20; -fx-border-color: black; -fx-border-width: 2; -fx-background-color: C7DB9C;" HBox.hgrow="ALWAYS">
                            <HBox.margin>
                               <Insets right="5.0" />
                            </HBox.margin>
                            <graphic>
-                              <VBox prefHeight="102.0" prefWidth="100.0">
+                              <VBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="102.0">
                                  <children>
                                     <ImageView fitHeight="61.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
                                           <Image url="@../Login/images/crimee.png" />
                                        </image>
                                        <VBox.margin>
-                                          <Insets left="22.0" top="5.0" />
+                                          <Insets left="22.0" right="15.0" top="5.0" />
                                        </VBox.margin>
                                     </ImageView>
                                     <Label alignment="CENTER" prefHeight="42.0" prefWidth="107.0" text="CRIME" textFill="WHITE">
@@ -264,14 +268,28 @@
                         </Button>
                      </children>
                   </HBox>
-                  <Button layoutX="207.0" layoutY="207.0" mnemonicParsing="false" prefHeight="112.0" prefWidth="107.0" style="-fx-background-radius: 70; -fx-border-color: black; -fx-border-radius: 70; -fx-border-width: 2; -fx-background-color: #b30000;" text="EMERGENCY" textFill="WHITE">
+                  <Label fx:id="timerLabel" layoutX="245.0" layoutY="339.0">
                      <font>
-                        <Font name="Elephant" size="11.0" />
+                        <Font name="System Bold" size="16.0" />
                      </font>
-                     <effect>
-                        <DropShadow />
-                     </effect>
-                  </Button>
+                  </Label>
+                  <Button fx:id="cancelButton" alignment="CENTER" layoutX="450.0" layoutY="340.0" mnemonicParsing="false" onAction="#CancelEmergency" text="Cancel" visible="false" />
+                  <HBox layoutY="237.0" prefHeight="133.0" prefWidth="521.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                     <children>
+                        <Pane maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="118.0" HBox.hgrow="ALWAYS" />
+                        <Pane layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="68.0" HBox.hgrow="ALWAYS" />
+                        <Button fx:id="EmergencyButton" alignment="CENTER" mnemonicParsing="false" onAction="#EmergencyButtonClicked" prefHeight="100.0" prefWidth="114.0" style="-fx-background-radius: 70; -fx-border-color: black; -fx-border-radius: 70; -fx-border-width: 2; -fx-background-color: #b30000;" text="EMERGENCY" textFill="WHITE" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Elephant" size="11.0" />
+                           </font>
+                           <effect>
+                              <DropShadow />
+                           </effect>
+                        </Button>
+                        <Pane maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="118.0" HBox.hgrow="ALWAYS" />
+                        <Pane maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="103.0" HBox.hgrow="ALWAYS" />
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
          </center>

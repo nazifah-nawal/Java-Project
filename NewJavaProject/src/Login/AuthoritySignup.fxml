@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Hyperlink?>
@@ -9,9 +10,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: FDFAF6;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login.AuthoritySignupController">
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: FDFAF6;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Login.AuthoritySignupController">
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="353.0" BorderPane.alignment="CENTER">
          <children>
@@ -39,36 +43,138 @@
       </AnchorPane>
    </left>
    <center>
-      <AnchorPane prefHeight="500.0" prefWidth="347.0" style="-fx-background-color: #123458;" BorderPane.alignment="CENTER">
+      <VBox prefHeight="500.0" prefWidth="392.0" style="-fx-background-color: #123458;" BorderPane.alignment="CENTER">
          <children>
-            <Label layoutX="12.0" layoutY="116.0" text="Instition Name :" textFill="#eaefef">
-               <font>
-                  <Font name="Elephant" size="14.0" />
-               </font></Label>
-            <ComboBox fx:id="InstitutionBox" editable="true" layoutX="12.0" layoutY="54.0" onAction="#ComboBoxInfo" prefHeight="25.0" prefWidth="190.0" promptText="Institution Type" style="-fx-background-color: FDFAF6;" />
-            <ComboBox fx:id="AddressBox" editable="true" layoutX="12.0" layoutY="290.0" onAction="#ComboBoxInfo" prefHeight="25.0" prefWidth="205.0" promptText="City/Area" style="-fx-background-color: FDFAF6;" />
-            <Label layoutX="12.0" layoutY="158.0" text="Contact :" textFill="#fdfaf6">
-               <font>
-                  <Font name="Elephant" size="14.0" />
-               </font></Label>
-            <Label layoutX="12.0" layoutY="204.0" text="Email Id :" textFill="#fdfaf6">
-               <font>
-                  <Font name="Elephant" size="14.0" />
-               </font></Label>
-            <TextField layoutX="129.0" layoutY="103.0" prefHeight="27.0" prefWidth="205.0" promptText="Enter Name" style="-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField layoutX="129.0" layoutY="149.0" prefHeight="27.0" prefWidth="205.0" promptText="ex.017xxxxxxxx" style="-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px;" />
-            <TextField layoutX="129.0" layoutY="191.0" prefHeight="27.0" prefWidth="205.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px;" />
-            <Button fx:id="Authority_signup" layoutX="112.0" layoutY="340.0" mnemonicParsing="false" onAction="#CollectInfo" prefHeight="24.0" prefWidth="127.0" style="-fx-background-color: FDFAF6;" text="Sign Up" textFill="#123458">
-               <font>
-                  <Font name="Elephant" size="14.0" />
-               </font>
-            </Button>
-            <Label layoutX="12.0" layoutY="250.0" text="Address :" textFill="#fdfaf6">
-               <font>
-                  <Font name="Elephant" size="14.0" />
-               </font></Label>
-            <TextField layoutX="129.0" layoutY="236.0" prefHeight="27.0" prefWidth="205.0" promptText="Full Address" style="-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px;" />
+            <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="501.0" prefWidth="324.0" spacing="5.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <ComboBox fx:id="InstitutionBox" editable="true" onAction="#ComboBoxInfo" prefHeight="25.0" prefWidth="190.0" promptText="Institution Type" style="-fx-background-color: FDFAF6;" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="30.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="347.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="58.0" prefWidth="122.0" text="Institution Name:" textFill="WHITE" HBox.hgrow="ALWAYS">
+                           <font>
+                              <Font name="Elephant" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="InstitutionName" onAction="#LoadAuthorityDashboard" prefHeight="27.0" prefWidth="205.0" promptText="Enter Name" style="-fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px; -fx-background-color: transparent; -fx-text-fill:white;" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets right="5.0" top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="55.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="347.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="58.0" prefWidth="122.0" text="Phone Number:" textFill="WHITE">
+                           <font>
+                              <Font name="Elephant" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="Contact" onAction="#LoadAuthorityDashboard" prefHeight="27.0" prefWidth="205.0" promptText="ex.017xxxxxxxx" style="-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill:white;" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets right="5.0" top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="134.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="52.0" prefWidth="324.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="58.0" prefWidth="122.0" text="Email:" textFill="WHITE">
+                           <font>
+                              <Font name="Elephant" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" top="5.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="Email" onAction="#LoadAuthorityDashboard" prefHeight="27.0" prefWidth="205.0" promptText="Email" style="-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill:white;" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets right="5.0" top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="249.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="52.0" prefWidth="324.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="58.0" prefWidth="122.0" text="Address:" textFill="WHITE">
+                           <font>
+                              <Font name="Elephant" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="Address" onAction="#LoadAuthorityDashboard" prefHeight="27.0" prefWidth="205.0" promptText="Full Address" style="-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill:white;" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets right="5.0" top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="281.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="52.0" prefWidth="324.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="58.0" prefWidth="122.0" text="Set Username:" textFill="WHITE">
+                           <font>
+                              <Font name="Elephant" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="Username" onAction="#LoadAuthorityDashboard" prefHeight="27.0" prefWidth="205.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill:white;" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets right="5.0" top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="343.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="52.0" prefWidth="324.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label prefHeight="58.0" prefWidth="122.0" text="Set Password" textFill="WHITE">
+                           <font>
+                              <Font name="Elephant" size="12.0" />
+                           </font>
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </Label>
+                        <TextField fx:id="Password" onAction="#LoadAuthorityDashboard" prefHeight="27.0" prefWidth="205.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill:white;" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets right="5.0" top="10.0" />
+                           </HBox.margin>
+                        </TextField>
+                     </children>
+                  </HBox>
+                  <ComboBox fx:id="AddressBox" editable="true" onAction="#ComboBoxInfo" prefHeight="25.0" prefWidth="205.0" promptText="City/Area" style="-fx-background-color: FDFAF6;" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="10.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <HBox alignment="CENTER" prefHeight="78.0" prefWidth="347.0">
+                     <children>
+                        <Pane prefHeight="78.0" prefWidth="354.0">
+                           <children>
+                              <Button fx:id="Authority_signup" alignment="CENTER" contentDisplay="CENTER" layoutX="109.0" layoutY="20.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#LoadAuthorityDashboard" prefHeight="24.0" prefWidth="127.0" style="-fx-background-color: FDFAF6;" text="Sign Up" textFill="#123458">
+                                 <font>
+                                    <Font name="Elephant" size="14.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </Pane>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
-      </AnchorPane>
+      </VBox>
    </center>
 </BorderPane>

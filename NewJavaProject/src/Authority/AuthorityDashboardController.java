@@ -4,23 +4,24 @@
  */
 package Authority;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+
+
 
 /**
  * FXML Controller class
  *
  * @author Nazifah
  */
-public class AuthorityDashboardController implements Initializable {
+public class AuthorityDashboardController {
 
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+     @FXML
+     private Label InstituteNameLabel; 
+     
+     public void setInstituteName(String name)
+     {
+         InstituteNameLabel.setText(name);
+     }
     
 }

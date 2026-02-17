@@ -1,6 +1,8 @@
 
 package Login;
 
+import Database.DBConnectionUser;
+import Database.InsertUserData;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,6 +19,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import SignUpInfo.UserSignupInfo;
+import java.sql.Connection;
+import java.awt.Toolkit;
+import javafx.scene.control.Alert;
 
 
 public class UserSignupController implements Initializable {
@@ -67,18 +72,7 @@ public class UserSignupController implements Initializable {
       
   }
   
-  public void initialize(URL location, ResourceBundle resources)
-  {
-      Addressbox.setItems(list);
-  }
-  
-  public void AddressInfo(ActionEvent event)
-  {
-      Address=Addressbox.getValue();
-  }
-  
-  public void CollectInfo()
-  {
+  public void EmergencyPageLink(ActionEvent event)throws IOException{
       
       String userName= UserName.getText();
       String name= Name.getText();
@@ -91,17 +85,118 @@ public class UserSignupController implements Initializable {
       String blood= Blood.getText();
       String allergy= Allergy.getText();
       
+      if(userName.isEmpty()||name.isEmpty()||gender.isEmpty()||age.isEmpty()||phnNum.isEmpty()||nid.isEmpty()||email.isEmpty()||emgContact.isEmpty()||blood.isEmpty()||allergy.isEmpty())
+      {
+          showError("Incomplete Form","Missing Information","Please fill all fields before signing up.");
+          return;
+          
+      }
+      boolean unique=CollectInfo(userName,name,gender,age,phnNum,nid,email,emgContact,blood,allergy);
+      if(!unique)
+       {
+           return;
+       }
       
-      UserSignupInfo usi= new UserSignupInfo(userName,name,gender,age,phnNum,nid,email,emgContact,Address,blood,allergy);
       
       
-      usi.showInfo();
       
       
+      
+      Parent root = FXMLLoader.load(getClass().getResource("/User/EmergencyPage.fxml"));
+      scene=new Scene(root);
+      stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+      stage.setScene(scene);
+      stage.show();
+  }
+  
+   private void showError(String message1,String message2,String message3)
+    {
+         Toolkit.getDefaultToolkit().beep();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(message1);
+        alert.setHeaderText(message2);
+        alert.setContentText(message3);
+        alert.showAndWait();
+        
+    }
+  
+  public void initialize(URL location, ResourceBundle resources)
+  {
+      Addressbox.setItems(list);
+      
+      UserName.textProperty().addListener((obs, oldText, newText) -> clearStyles());
+      Email.textProperty().addListener((obs, oldText, newText) -> clearStyles());
+      PhoneNum.textProperty().addListener((obs, oldText, newText) -> clearStyles());
+      Nid.textProperty().addListener((obs, oldText, newText) -> clearStyles());
+
+  }
+  
+  public void AddressInfo(ActionEvent event)
+  {
+      Address=Addressbox.getValue();
+  }
+  
+  public boolean CollectInfo(String userName,String name,String gender,String age,String phnNum,String nid,String email,String emgContact,String blood,String allergy)
+  {
      
       
       
+      UserSignupInfo usi= new UserSignupInfo(userName,name,gender,age,phnNum,nid,email,emgContact,Address,blood,allergy);
+      
+      Connection con= new DBConnectionUser().connect();
+      InsertUserData Insert= new InsertUserData(con,usi);
+      
+      String success=Insert.insert();
+        if(success.equals("SUCCESS"))
+        {
+            return true;
+        }
+        else
+        {
+             handleDuplicate(success);
+             return false;
+        }
+      
+      //usi.showInfo();   
+      
+      
   }
+  
+  private void handleDuplicate(String message) {
+
+    clearStyles(); // reset previous red borders
+
+    if (message.contains("username")) {
+        markError(UserName);
+    }
+    else if (message.contains("email")) {
+        markError(Email);
+    }
+    else if (message.contains("phone_num")) {
+        markError(PhoneNum);
+    }
+    else if (message.contains("nid")) {
+        markError(Nid);
+    }
+
+    showError("Duplicate Entry",
+            "Already Exists",
+            "This information already exists. Please use different value.");
+    }
+  
+    private void markError(TextField field) {
+    field.setStyle("-fx-border-color: red; -fx-border-width: 2;");
+    }
+    
+    private void clearStyles() {
+    UserName.setStyle("-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill:white;");
+    Email.setStyle("-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill:white;");
+    PhoneNum.setStyle("-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill:white;");
+    Nid.setStyle("-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill:white;");
+    }
+  
+
+
        
     
 }
