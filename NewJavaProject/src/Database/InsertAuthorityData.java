@@ -43,13 +43,7 @@ public class InsertAuthorityData extends InsertData {
 
         } catch (SQLException e) {
            
-            if (e.getErrorCode() == 1062) {   // 1062 = Duplicate entry
-               //System.out.println("Username already exists!");
-               return e.getMessage();
-              }
-
-             e.printStackTrace();
-             return "Error";
+           return handleSQLException(e);
         }
     }
 }

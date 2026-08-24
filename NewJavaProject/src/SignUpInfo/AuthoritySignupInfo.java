@@ -2,15 +2,10 @@
 package SignUpInfo;
 
 
-public class AuthoritySignupInfo {
+public class AuthoritySignupInfo extends SignupInfo{
     
     private String instType;
-    private String instName;
-    private String contact;
-    private String email;
     private String address;
-    private String area;
-    private String username;
     private String pass;
     
     public AuthoritySignupInfo()
@@ -20,8 +15,8 @@ public class AuthoritySignupInfo {
     public AuthoritySignupInfo(String type,String name,String contact,String email,String address,String area,String username,String pass)
     {
         this.instType=type;
-        this.instName=name;
-        this.contact=contact;
+        this.name=name;
+        this.phone=contact;
         this.email=email;
         this.address=address;
         this.area=area;
@@ -38,19 +33,19 @@ public class AuthoritySignupInfo {
     }
 
     public String getInstName() {
-        return instName;
+        return name;
     }
 
     public void setInstName(String instName) {
-        this.instName = instName;
+        this.name = instName;
     }
 
     public String getContact() {
-        return contact;
+        return phone;
     }
 
     public void setContact(String contact) {
-        this.contact = contact;
+        this.phone = contact;
     }
 
     public String getEmail() {
@@ -96,8 +91,8 @@ public class AuthoritySignupInfo {
     public void showInfo()
     {
         System.out.println("Institution Type: "+instType);
-        System.out.println("Name:"+instName);
-        System.out.println("Contact:"+contact);
+        System.out.println("Name:"+name);
+        System.out.println("Contact:"+phone);
         System.out.println("Email:"+email);
         System.out.println("Address:"+address);
         System.out.println("Area:"+area);

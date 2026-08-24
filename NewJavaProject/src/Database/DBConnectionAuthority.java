@@ -3,6 +3,6 @@ package Database;
 public class DBConnectionAuthority extends DBConnection {
 
     public DBConnectionAuthority() {
-        super("authority");  // your authority database name
+        super("sosync");  // your authority database name
     }
 }

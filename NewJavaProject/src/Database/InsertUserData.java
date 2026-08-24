@@ -44,13 +44,7 @@ public class InsertUserData extends InsertData{
         }
         catch(SQLException e){
             
-            if (e.getErrorCode() == 1062) {   // 1062 = Duplicate entry
-               
-               return e.getMessage();
-              }
-
-             e.printStackTrace();
-             return "Error";
+            return handleSQLException(e);
         }
 
         

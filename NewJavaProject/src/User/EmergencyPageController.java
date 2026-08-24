@@ -1,5 +1,10 @@
 package User;
 
+import Audio.AccidentAudio;
+import Audio.CrimeAudio;
+import Audio.EarthquakeAudio;
+import Audio.FireAudio;
+import Audio.RedAudio;
 import Database.DBConnectionUser;
 import Emergency.Accident;
 import Emergency.Crime;
@@ -13,6 +18,7 @@ import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import Emergency.Fire;
 import Emergency.Red;
+import Emergency.Structure;
 import java.sql.Connection;
 import javafx.util.Duration;
 import javafx.animation.KeyFrame;
@@ -40,6 +46,8 @@ public class EmergencyPageController {
     private Label timerLabel;
 
     @FXML
+    private Label status;
+    @FXML
     private Timeline statusChecker;
 
     private UserRequests currentUser;
@@ -49,10 +57,49 @@ public class EmergencyPageController {
     @FXML
     private Button viewProfileBtn;
 
+    private String username;
+
     // NEW: Track already notified emergencies to prevent duplicate popups
-    private Set<Integer> notifiedDispatches = new HashSet<>();
+    private static final Set<Integer> notifiedDispatches = new HashSet<>();
+
+    AccidentAudio accidentAudio;
+    CrimeAudio crimeAudio;
+    EarthquakeAudio earthquakeAudio;
+    FireAudio fireAudio;
+    RedAudio redAudio;
+
+    @FXML
+    public void initialize() {
+
+        accidentAudio = new AccidentAudio();
+        accidentAudio.loadAudio();
+
+        crimeAudio = new CrimeAudio();
+        crimeAudio.loadAudio();
+
+        earthquakeAudio = new EarthquakeAudio();
+        earthquakeAudio.loadAudio();
+
+        fireAudio = new FireAudio();
+        fireAudio.loadAudio();
+        
+        redAudio= new RedAudio();
+        redAudio.loadAudio();
+        
+        
+
+        if (statusChecker == null || statusChecker.getStatus() != javafx.animation.Animation.Status.RUNNING) {
+            startStatusChecker();
+        }
+
+    }
 
     public void LoadTodoPage(ActionEvent event, String s1, String s2) throws IOException {
+
+        if (statusChecker != null) {
+            statusChecker.stop();
+        }
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/TodoPage.fxml"));
         Parent root = loader.load();
 
@@ -68,7 +115,9 @@ public class EmergencyPageController {
 
     public void setUser(UserRequests user) {
         this.currentUser = user;
-        startStatusChecker(); // Start polling immediately when user logs in
+        //if (statusChecker == null) {
+        startStatusChecker();
+        //}
     }
 
     private void insertEmergency(String type) {
@@ -152,6 +201,8 @@ public class EmergencyPageController {
 
         if (result.isPresent() && result.get() == yesButton) {
             resolveEmergency(requestId);
+            loadEmergencyPage();
+
         }
     }
 
@@ -176,93 +227,88 @@ public class EmergencyPageController {
         }
     }
 
-    
-    @FXML
-    public void FireButtonClicked(ActionEvent event) throws IOException {
+    /// Here runtime Polymorphism is used
+    /// Here runtime Polymorphism is used
+    private void handleEmergency(ActionEvent event, String name, Structure e,Runnable audioPlay) throws IOException {
         if (countdown != null) {
             countdown.stop();
         }
-        insertEmergency("Fire");
-        Fire ob = new Fire();
-        LoadTodoPage(event, ob.to_do(), ob.not_to_do());
-    }
 
-    @FXML
-    public void AccidentButtonClicked(ActionEvent event) throws IOException {
-        if (countdown != null) {
-            countdown.stop();
-        }
-        insertEmergency("Accident");
-        Accident ob = new Accident();
-        LoadTodoPage(event, ob.to_do(), ob.not_to_do());
-    }
-
-    @FXML
-    public void EarthquakeButtonClicked(ActionEvent event) throws IOException {
-        if (countdown != null) {
-            countdown.stop();
-        }
-        insertEmergency("Eathquake");
-        Earthquake ob = new Earthquake();
-        LoadTodoPage(event, ob.to_do(), ob.not_to_do());
-    }
-
-    @FXML
-    public void CrimeButtonClicked(ActionEvent event) throws IOException {
-        if (countdown != null) {
-            countdown.stop();
-        }
-        insertEmergency("Crime");
-        Crime ob = new Crime();
-        LoadTodoPage(event, ob.to_do(), ob.not_to_do());
-    }
-
-    @FXML
-    public void EmergencyButtonClicked(ActionEvent event) {
-
-        if (emergencyActive) {
-            return;
-        }
-
+       
         emergencyActive = true;
         timeSeconds = 10;
-        timerLabel.setText("Time remaining: " + timeSeconds + "s");
+        timerLabel.setText("Time remaining to cancel request: " + timeSeconds + "s");
 
         cancelButton.setVisible(true);
-        countdown = new Timeline(
-                new KeyFrame(Duration.seconds(1), e -> {
+        cancelButton.toFront();
 
+        countdown = new Timeline(
+                new KeyFrame(Duration.seconds(1), ev -> {
                     timeSeconds--;
-                    timerLabel.setText("Time remaining: " + timeSeconds + "s");
+                    timerLabel.setText("Time remaining to cancel request: " + timeSeconds + "s");
 
                     if (timeSeconds <= 0) {
                         countdown.stop();
                         emergencyActive = false;
                         cancelButton.setVisible(false);
-                        try {
-                            Red ob = new Red();
-
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/TodoPage.fxml"));
-                            Parent root = loader.load();
-
-                            TodoPageController controller = loader.getController();
-                            controller.setTextT(ob.to_do());
-                            controller.setTextN(ob.not_to_do());
-
-                            Stage stage = (Stage) timerLabel.getScene().getWindow();
-                            stage.setScene(new Scene(root));
-                            stage.show();
-
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                        }
-
+ 
+                        insertEmergency(name); // insert into DB
+                        
+                        if (audioPlay != null) {
+                        audioPlay.run();
+                    }
+                        // After timer ends, load ToDo page for the emergency
+                        Platform.runLater(() -> {
+                            try {
+                                LoadTodoPage(event, e.to_do(), e.not_to_do());
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                            }
+                        });
                     }
                 })
         );
 
         countdown.setCycleCount(10);
         countdown.play();
+    }
+
+    @FXML
+    public void FireButtonClicked(ActionEvent event) throws IOException {
+
+        handleEmergency(event, "Fire", new Fire(),
+                () -> fireAudio.play());
+       
+    }
+
+    @FXML
+    public void AccidentButtonClicked(ActionEvent event) throws IOException {
+        handleEmergency(event, "Accident", new Accident(),
+                ()->accidentAudio.play());
+        
+    }
+
+    @FXML
+    public void EarthquakeButtonClicked(ActionEvent event) throws IOException {
+        handleEmergency(event, "Earthquake", new Earthquake(),
+                ()->earthquakeAudio.play());
+        
+    }
+
+    @FXML
+    public void CrimeButtonClicked(ActionEvent event) throws IOException {
+        handleEmergency(event, "Crime", new Crime(),
+                ()->crimeAudio.play());
+        
+    }
+
+    @FXML
+    public void EmergencyButtonClicked(ActionEvent event) throws IOException {
+
+        handleEmergency(event,"Unknown emergency",new Red(),
+                ()->redAudio.play());
+        
+        
     }
 
     @FXML
@@ -284,6 +330,10 @@ public class EmergencyPageController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ViewProfile.fxml"));
             Parent root = loader.load();
 
+            ViewProfileController controller = loader.getController();
+            controller.setName(currentUser.getUsername());
+            controller.setUser(currentUser);
+
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.show();
@@ -301,6 +351,10 @@ public class EmergencyPageController {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("EditProfile.fxml"));
             Parent root = loader.load();
+
+            EditProfileController controller = loader.getController();
+            controller.setName(currentUser.getUsername());
+            controller.setUser(currentUser);
 
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -328,10 +382,47 @@ public class EmergencyPageController {
             e.printStackTrace();
         }
     }
-    
-    public void setlabel(String name)
-    {
-        GreetingsLabel.setText("Hello, "+name);
+
+    public void setlabel(String name) {
+
+        GreetingsLabel.setText("Hello, " + name);
+    }
+
+    public void setStatus(String msg) {
+        status.setText(msg);
+    }
+
+    public void setUsername(String un) {
+        username = un;
+    }
+
+    private void loadEmergencyPage() {
+        try {
+
+            if (statusChecker != null) {
+                statusChecker.stop();
+            }
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/EmergencyPage.fxml"));
+            Parent root = loader.load();
+
+            EmergencyPageController controller = loader.getController();
+
+            // pass user again
+            controller.setUser(currentUser);
+            controller.setlabel(currentUser.getName());
+            controller.setUsername(currentUser.getUsername());
+            controller.setStatus("Assistance has reached you. Take care! 🏥");
+
+            Stage stage = (Stage) javafx.stage.Window.getWindows()
+                    .filtered(w -> w.isShowing() && w instanceof Stage)
+                    .get(0);
+            stage.setScene(new Scene(root));
+            stage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

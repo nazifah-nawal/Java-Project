@@ -21,6 +21,8 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 
 
@@ -40,6 +42,17 @@ public class UserLoginController {
     private UserRequests currentUser;
     
     private String labelname;
+    @FXML
+    private void hoverEnter(MouseEvent event) {
+        Button btn = (Button) event.getSource();
+        btn.setStyle("-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15;");
+    }
+
+    @FXML
+    private void hoverExit(MouseEvent event) {
+        Button btn = (Button) event.getSource();
+        btn.setStyle("-fx-background-color: rgba(255,255,255,0.3); -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15;");
+    }
 
     @FXML
     public void initialize() {
@@ -76,7 +89,7 @@ public class UserLoginController {
                 int userId = rs.getInt("id");   // get correct id from database
                 String usernameFromDB = rs.getString("username");
 
-                currentUser = new UserRequests(userId, usernameFromDB);
+                currentUser = new UserRequests(userId, usernameFromDB,labelname);
             } else {
                 ErrorLabel.setText("Invalid username");
             }
@@ -101,6 +114,8 @@ public class UserLoginController {
         // pass logged in user
         controller.setUser(currentUser);
         controller.setlabel(labelname);
+        controller.setUsername(username.getText());
+        controller.setStatus("Please push a button according to your Emergency.\n Keep calm, help will arrive soon!");
         Scene scene = new Scene(root);
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.setScene(scene);
@@ -110,7 +125,7 @@ public class UserLoginController {
     @FXML
     public void GoBack(ActionEvent event) throws IOException {
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("roleSelection.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("UserSignup.fxml"));
         Parent root = loader.load();
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();

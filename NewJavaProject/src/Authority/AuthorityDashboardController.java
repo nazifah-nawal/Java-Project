@@ -47,6 +47,17 @@ public class AuthorityDashboardController {
     @FXML
     private TableColumn<ViewEmergency, Void> detailsColumn;
 
+    private final java.util.Set<Integer> shownResolved = new java.util.HashSet<>();
+
+    @FXML
+    private Label ActiveLabel;
+
+    @FXML
+    private Label RespondingLabel;
+
+    @FXML
+    private Label ResolvedLabel;
+
     @FXML
     public void initialize() {
 
@@ -62,12 +73,18 @@ public class AuthorityDashboardController {
         timeColumn.setCellValueFactory(data
                 -> new SimpleStringProperty(data.getValue().getTime()));
 
+        updateStatusCounts();
         addActionButtonToTable();
         addDetailsButtonToTable();
         colorStatusColumn();
         loadEmergencies();
 
-        Timeline refresher = new Timeline(new KeyFrame(Duration.seconds(3), e -> loadEmergencies()));
+        Timeline refresher = new Timeline(new KeyFrame(Duration.seconds(3), e
+                -> {
+            loadEmergencies();
+            updateStatusCounts();
+
+        }));
         refresher.setCycleCount(Timeline.INDEFINITE);
         refresher.play();
     }
@@ -85,12 +102,21 @@ public class AuthorityDashboardController {
                     + "u.address "
                     + "FROM emergency_requests e "
                     + "JOIN user_info u ON e.user_id = u.id "
-                    + "WHERE e.status != 'RESOLVED'";
+                    + "WHERE e.status IN ('NEW','DISPATCHED','RESOLVED')";
 
             PreparedStatement ps = con.prepareStatement(query);
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
+
+                int id = rs.getInt("request_id");
+                String status = rs.getString("status");
+
+                // skip resolved already shown
+                if (status.equals("RESOLVED") && shownResolved.contains(id)) {
+                    continue;
+                }
+
                 list.add(new ViewEmergency(
                         rs.getInt("request_id"),
                         rs.getInt("user_id"),
@@ -102,6 +128,60 @@ public class AuthorityDashboardController {
             }
 
             incidentTable.setItems(list);
+
+            Timeline remover = new Timeline(new KeyFrame(Duration.seconds(2), ev -> {
+
+                incidentTable.getItems().removeIf(item -> {
+                    if (item.getStatus().equals("RESOLVED")) {
+                        shownResolved.add(item.getEmergencyId()); // remember it
+                        return true;
+                    }
+                    return false;
+                });
+
+            }));
+            remover.play();
+            con.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void updateStatusCounts() {
+        try {
+            DBConnectionUser db = new DBConnectionUser();
+            Connection con = db.connect();
+
+            String query = "SELECT status, COUNT(*) as count FROM emergency_requests GROUP BY status";
+            PreparedStatement ps = con.prepareStatement(query);
+            ResultSet rs = ps.executeQuery();
+
+            int newCount = 0;
+            int dispatchedCount = 0;
+            int resolvedCount = 0;
+
+            while (rs.next()) {
+                String status = rs.getString("status");
+                int count = rs.getInt("count");
+
+                switch (status) {
+                    case "NEW":
+                        newCount = count;
+                        break;
+                    case "DISPATCHED":
+                        dispatchedCount = count;
+                        break;
+                    case "RESOLVED":
+                        resolvedCount = count;
+                        break;
+                }
+            }
+
+            ActiveLabel.setText(String.valueOf(newCount));
+            RespondingLabel.setText(String.valueOf(dispatchedCount));
+            ResolvedLabel.setText(String.valueOf(resolvedCount));
+
             con.close();
 
         } catch (Exception e) {
@@ -181,25 +261,21 @@ public class AuthorityDashboardController {
     private void openDetailsPopup(int userId) {
 
         try {
-            // Load the FXML file
+
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/Authority/ViewDetails.fxml")
             );
 
             Parent root = loader.load();
 
-            // Get controller of ViewDetails.fxml
             ViewDetailsController controller
                     = loader.getController();
 
-            // Send userId to that controller
             controller.loadUserData(userId);
 
-            // Create new Stage (popup window)
             Stage stage = new Stage();
             stage.setTitle("User Details");
 
-            // Make it modal (blocks clicking main window)
             stage.initModality(Modality.APPLICATION_MODAL);
 
             // Set scene
@@ -311,16 +387,38 @@ public class AuthorityDashboardController {
     public void setInstituteName(String name) {
         InstituteNameLabel.setText(name);
     }
-    
-    @FXML
-    public void GoBack(ActionEvent event) throws IOException{
-        
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login/roleSelection.fxml"));
-            Parent root = loader.load();
 
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.show();
-        
-    }   
+    @FXML
+    public void GoBack(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Login/roleSelection.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+
+    }
+
+    @FXML
+    public void LoadReport(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Reports.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
+    @FXML
+    public void LoadResponse(ActionEvent event) throws IOException {
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Response.fxml"));
+        Parent root = loader.load();
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }

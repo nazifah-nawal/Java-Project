@@ -27,6 +27,8 @@ import User.UserRequests;
 import java.sql.*;
 import java.awt.Toolkit;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 public class UserSignupController implements Initializable {
 
@@ -60,6 +62,18 @@ public class UserSignupController implements Initializable {
     private TextField Allergy;
 
     private String Address;
+    
+    @FXML
+    private void hoverEnter(MouseEvent event) {
+        Button btn = (Button) event.getSource();
+        btn.setStyle("-fx-background-color: rgba(255,255,255,0.7); -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15;");
+    }
+
+    @FXML
+    private void hoverExit(MouseEvent event) {
+        Button btn = (Button) event.getSource();
+        btn.setStyle("-fx-background-color: rgba(255,255,255,0.3); -fx-background-radius: 15; -fx-border-color: white; -fx-border-radius: 15;");
+    }
 
     public void LoginPageLink(ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/Login/UserLogin.fxml"));
@@ -94,7 +108,7 @@ public class UserSignupController implements Initializable {
         }
 
         try {
-            validateUserInfo(email, phnNum, nid);
+            validateUserInfo(email, phnNum, nid,emgContact);
         } catch (ValidationException e) {
             Toolkit.getDefaultToolkit().beep();
             showError("Validation Error", "Invalid Input", e.getMessage());
@@ -115,11 +129,13 @@ public class UserSignupController implements Initializable {
         EmergencyPageController controller = loader.getController();
 
         // Create UserRequests object
-        UserRequests newUser = new UserRequests(userId, userName);
+        UserRequests newUser = new UserRequests(userId, userName,name);
 
         // Pass user to emergency page
         controller.setUser(newUser);
         controller.setlabel(name);
+        controller.setUsername(UserName.getText());
+        controller.setStatus("Please push a button according to your Emergency.\n Keep calm, help will arrive soon!");
 
         scene = new Scene(root);
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -211,19 +227,19 @@ public class UserSignupController implements Initializable {
     }
 
     private void clearStyles() {
-        UserName.setStyle("-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill:white;");
-        Email.setStyle("-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill:white;");
-        PhoneNum.setStyle("-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill:white;");
-        Nid.setStyle("-fx-background-color: transparent; -fx-border-color: FDFAF6; -fx-border-width: 0px 0px 2px 0px; -fx-text-fill:white;");
+        UserName.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1); -fx-border-color: #f3f3eb; -fx-border-width: 1; -fx-text-fill: white; -fx-background-radius: 15; -fx-border-radius: 15;");
+        Email.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1); -fx-border-color: #f3f3eb; -fx-border-width: 1; -fx-text-fill: white; -fx-background-radius: 15; -fx-border-radius: 15;");
+        PhoneNum.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1); -fx-border-color: #f3f3eb; -fx-border-width: 1; -fx-text-fill: white; -fx-background-radius: 15; -fx-border-radius: 15;");
+        Nid.setStyle("-fx-background-color: rgba(255, 255, 255, 0.1); -fx-border-color: #f3f3eb; -fx-border-width: 1; -fx-text-fill: white; -fx-background-radius: 15; -fx-border-radius: 15;");
     }
 
-    private void validateUserInfo(String email, String phnNum, String nid) throws ValidationException {
+    private void validateUserInfo(String email, String phnNum, String nid,String emgContact) throws ValidationException {
 
         // Phone number validation: must be 11 digits
         if (!phnNum.matches("^01[0-9]{9}$")) {
             throw new InvalidPhoneException("Phone number must start with 01 and be 11 digits!");
         }
-        // Email validation using simple regex
+        // Email validation 
         if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
             throw new InvalidEmailException("Invalid email format!");
         }
@@ -232,6 +248,10 @@ public class UserSignupController implements Initializable {
         if (!nid.matches("\\d{10,17}")) {
             throw new InvalidNIDException("NID must be 10-17 digits!");
         }
+        if (!emgContact.matches("^01[0-9]{9}$")) {
+            throw new InvalidPhoneException("Phone number must start with 01 and be 11 digits!");
+        }
+        
 
     }
 
